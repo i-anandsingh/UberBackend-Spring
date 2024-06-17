@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "review_table")
-public class Review {
+public class Review extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +26,4 @@ public class Review {
     private String content;
 
     private Double rating;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)   // annotation tells spring about the format of the Date object to be stored i.e. Date/ Time/ Timestamp
-    @CreatedDate    // annotation tells spring only handle at object creation
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate   // annotation tells spring only handle at object update
-    private Date updatedAt;
 }
