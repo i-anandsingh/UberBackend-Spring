@@ -1,4 +1,4 @@
-package com.example.reviewservice.entity;
+package com.uber.reviewservice.entity;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;

@@ -1,6 +1,6 @@
-package com.example.reviewservice.repository;
+package com.uber.reviewservice.repository;
 
-import com.example.reviewservice.entity.ReviewEntity;
+import com.uber.reviewservice.entity.ReviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
