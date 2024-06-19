@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "bookingReview")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ReviewEntity extends BaseEntity {
 
     @Column(nullable = false)
