@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bookingReview")
+@Table(name = "booking_review")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class ReviewEntity extends BaseEntity {
 

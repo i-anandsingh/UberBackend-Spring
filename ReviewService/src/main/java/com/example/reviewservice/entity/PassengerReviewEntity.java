@@ -1,5 +1,6 @@
 package com.example.reviewservice.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +9,10 @@ import lombok.Setter;
 @Setter
 @Entity
 public class PassengerReviewEntity extends ReviewEntity{
-    private String passengerReviewEntity;
+
+    @Column(nullable = false)
+    private String passengerReview;
+
+    @Column(nullable = false)
+    private String passengerRating;
 }
