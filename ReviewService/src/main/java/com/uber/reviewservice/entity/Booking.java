@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Booking extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private ReviewEntity review;
 
     @Enumerated(value = EnumType.STRING)
@@ -34,9 +34,3 @@ public class Booking extends BaseEntity {
     @ManyToOne
     private Passenger passenger;
 }
-
-/*
-Review and Booking are related to each other. So before saving booking in db we need to have review already present.
-Otherwise, error will be thrown. CascadeType helps in achieving this, it helps us in not needing to remember
-what needs to be saved first in db and what last.
- */
