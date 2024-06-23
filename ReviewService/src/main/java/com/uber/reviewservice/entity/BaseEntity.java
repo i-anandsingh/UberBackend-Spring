@@ -12,7 +12,7 @@ import java.util.Date;
 public abstract class BaseEntity {  // keeping Parent as abstract because we dont want anyone to create any object of this class
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
