@@ -25,8 +25,6 @@ public class Driver extends BaseEntity{
     @Column(unique = true, nullable = false)
     private String licenseNumber;
 
-    private String phoneNumber;
-
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private List<Booking> bookings = new ArrayList<>();

@@ -14,6 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Booking extends BaseEntity {
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Review review;
+
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
 
