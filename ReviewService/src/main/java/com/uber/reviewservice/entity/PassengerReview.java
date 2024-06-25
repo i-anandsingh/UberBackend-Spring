@@ -11,10 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "passenger_review")
-public class PassengerReviewEntity extends ReviewEntity{
+public class PassengerReview extends Review{
 
     @Column(nullable = false)
     private String passengerReview;

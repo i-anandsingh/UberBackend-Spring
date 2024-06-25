@@ -12,7 +12,9 @@ import lombok.*;
 @Entity
 @Table(name = "booking_review")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class ReviewEntity extends BaseEntity {
+public class Review extends BaseEntity {
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Booking booking;
 
     @Column(nullable = false)
     private String content;

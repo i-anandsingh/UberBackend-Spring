@@ -14,9 +14,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Booking extends BaseEntity {
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private ReviewEntity review;
-
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
 
@@ -28,9 +25,9 @@ public class Booking extends BaseEntity {
 
     private Long totalDistance;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Driver driver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Passenger passenger;
 }
