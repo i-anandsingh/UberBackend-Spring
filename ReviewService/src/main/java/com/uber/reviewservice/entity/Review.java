@@ -15,6 +15,7 @@ import lombok.*;
 public class Review extends BaseEntity {
 
     @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(nullable = false)
     private Booking booking;
 
     @Column(nullable = false)
