@@ -14,7 +14,7 @@ import lombok.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Review extends BaseEntity {
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Booking booking;
 
