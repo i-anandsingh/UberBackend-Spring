@@ -10,7 +10,6 @@ import java.util.Collection;
 /**
  * We need this class because spring security works on UserDetails polymorphic type for auth
  */
-@Component
 public class AuthPassengerDetails extends Passenger implements UserDetails {
 
     private final String username;    // email /name/ id
@@ -29,6 +28,11 @@ public class AuthPassengerDetails extends Passenger implements UserDetails {
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     // below set of methods not required due to business logic

@@ -1,20 +1,37 @@
 package com.uber.service.auth.controller;
 
+import com.uber.service.auth.dtos.AuthRequestDTO;
 import com.uber.service.auth.dtos.PassengerDTO;
 import com.uber.service.auth.dtos.PassengerSignUpRequestDTO;
 import com.uber.service.auth.service.AuthService;
+import com.uber.service.auth.service.JwtService;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    @Value("${cookie.expiry}")
+    private int cookieExpiry;
 
-    private AuthController(AuthService authService) {
+    private final AuthService authService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+
+    private AuthController(AuthService authService, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.authService = authService;
+        this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/signup/passenger")
@@ -23,11 +40,26 @@ public class AuthController {
         return new ResponseEntity<>(passengerDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/login/passenger")
+    @PostMapping("/login/passenger")
     public ResponseEntity<?> loginPassenger(
-            @RequestParam("email") String email
+            @RequestBody AuthRequestDTO authRequestDTO,
+            HttpServletResponse response
     ){
-
-        return new ResponseEntity<>(10, HttpStatus.OK);
+        System.out.println("Request Received: " + authRequestDTO);
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
+        if(authentication.isAuthenticated()){
+            String JwtToken = jwtService.creatToken(authRequestDTO.getEmail());
+            ResponseCookie cookie = ResponseCookie
+                    .from("JwtToken", JwtToken)
+                    .httpOnly(true)
+                    .secure(false)
+                    .path("/")
+                    .maxAge(cookieExpiry)
+                    .build();
+            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+            return new ResponseEntity<>("Successfully logged in", HttpStatus.OK);
+        } else{
+            throw new UsernameNotFoundException("Username or password is incorrect");
+        }
     }
 }
