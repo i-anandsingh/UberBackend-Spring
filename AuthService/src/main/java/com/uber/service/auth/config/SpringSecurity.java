@@ -9,7 +9,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class Security{
+public class SpringSecurity {
 
     //csrf : cross site request forgery
     @Bean
