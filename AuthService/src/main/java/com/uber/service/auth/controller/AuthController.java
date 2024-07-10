@@ -5,6 +5,8 @@ import com.uber.service.auth.dtos.PassengerDTO;
 import com.uber.service.auth.dtos.PassengerSignUpRequestDTO;
 import com.uber.service.auth.service.AuthService;
 import com.uber.service.auth.service.JwtService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -61,5 +65,13 @@ public class AuthController {
         } else{
             throw new UsernameNotFoundException("Username or password is incorrect");
         }
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken(HttpServletRequest httpServletRequest){
+        for(Cookie cookie : httpServletRequest.getCookies()){
+            System.out.println(cookie.getName() + " " + cookie.getValue());
+        }
+        return new ResponseEntity<>("Token validated", HttpStatus.OK);
     }
 }

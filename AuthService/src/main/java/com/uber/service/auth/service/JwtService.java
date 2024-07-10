@@ -61,7 +61,7 @@ public class JwtService implements CommandLineRunner {
     /**
      * This method extracts a very particular piece of info from the token. e.g. Expiration
      */
-    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
@@ -83,7 +83,7 @@ public class JwtService implements CommandLineRunner {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    private Boolean isValidJwt(String token, String email) {
+    public Boolean isValidJwt(String token, String email) {
         final String userEmailFetched = getClaimFromToken(token, Claims::getSubject);
         return (userEmailFetched.equals(email)) && !isTokenExpired(token);
     }
