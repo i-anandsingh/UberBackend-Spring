@@ -1,4 +1,4 @@
-package com.uber.service.auth.entity;
+package com.uber.service.entityservice.models;
 
 
 import jakarta.persistence.*;
