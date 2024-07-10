@@ -1,6 +1,6 @@
 package com.uber.service.auth.dtos;
 
-import com.uber.service.auth.entity.Passenger;
+import com.uber.service.entityservice.models.Passenger;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
