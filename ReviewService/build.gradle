@@ -34,7 +34,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql
-    implementation 'org.flywaydb:flyway-mysql:10.8.1'
 }
 
 tasks.named('test') {
