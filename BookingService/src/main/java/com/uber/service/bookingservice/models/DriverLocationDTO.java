@@ -1,4 +1,4 @@
-package com.uber.service.locationservice.models;
+package com.uber.service.bookingservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
