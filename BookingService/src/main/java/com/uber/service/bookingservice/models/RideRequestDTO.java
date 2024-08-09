@@ -1,5 +1,6 @@
-package com.uber.service.socketserver.models;
+package com.uber.service.bookingservice.models;
 
+import com.uber.service.entityservice.models.ExactLocation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class RideRequestDTO {
     private Long passengerId;
-    private ExactLocation startLocation;
-    private ExactLocation endLocation;
     private List<Long> driverIds;
+    private Long bookingId;
 }
