@@ -17,7 +17,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +31,6 @@ public class BookingServiceImpl implements BookingService {
     private final LocationServiceApi locationServiceApi;
     private final DriverRepository driverRepository;
     private final SocketApi socketApi;
-//    private static final String LOCATION_SERVICE = "http://localhost:9093";
 
     public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi, DriverRepository driverRepository, SocketApi socketApi) {
         this.passengerRepository = passengerRepository;

@@ -4,7 +4,6 @@ import com.netflix.discovery.EurekaClient;
 import com.uber.service.bookingservice.apis.LocationServiceApi;
 import com.uber.service.bookingservice.apis.SocketApi;
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Retrofit;
