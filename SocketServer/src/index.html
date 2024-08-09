@@ -40,6 +40,10 @@
                 li.textContent = message.body;
                 document.getElementById("list").appendChild(li);
             })
+            stompClient.subscribe("/topic/rideRequest", function(data){
+                const response = confirm("You have a new ride request from passenger : ${JSON.parse(data.body).passengerId}. Do you want to accept?");
+                stompClient.send("/app/rideResponse", {},  JSON.stringify({response}));
+            })
         });
     }
 
