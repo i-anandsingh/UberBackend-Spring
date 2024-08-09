@@ -4,6 +4,8 @@ import com.uber.service.socketserver.models.RideRequestDTO;
 import com.uber.service.socketserver.models.RideResponseDTO;
 import com.uber.service.socketserver.models.UpdateBookingRequestDTO;
 import com.uber.service.socketserver.models.UpdateBookingResponseDTO;
+import com.uber.service.socketserver.producers.KafkaProducerService;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -21,10 +23,18 @@ public class DriverRequestController {
 
     private final SimpMessagingTemplate messagingTemplate;
     private final RestTemplate restTemplate;
+    private final KafkaProducerService kafkaProducerService;
 
-    public DriverRequestController(SimpMessagingTemplate messagingTemplate) {
+    public DriverRequestController(SimpMessagingTemplate messagingTemplate, KafkaProducerService kafkaProducerService) {
         this.messagingTemplate = messagingTemplate;
         this.restTemplate = new RestTemplate();
+        this.kafkaProducerService = kafkaProducerService;
+    }
+
+    @GetMapping
+    public Boolean help() {
+        kafkaProducerService.publishMessage("sample-topic", "Message from Kafka Producer");
+        return true;
     }
 
     @PostMapping("/newRide")
